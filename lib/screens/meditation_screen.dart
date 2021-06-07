@@ -18,7 +18,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
     _controller.addListener(() {
       setState(() {});
     });
-    _controller.setLooping(true);
+    _controller.setLooping(false);
     _controller.initialize().then((_) => setState(() {}));
     _controller.play();
   }
@@ -60,7 +60,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                   children: <Widget>[
                     VideoPlayer(_controller),
                     //_ControlsOverlay(controller: _controller),
-                    VideoProgressIndicator(_controller, allowScrubbing: true),
+                    //VideoProgressIndicator(_controller, allowScrubbing: true),
                   ],
                 ),
               ),

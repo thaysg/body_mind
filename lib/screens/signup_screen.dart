@@ -3,7 +3,6 @@ import 'package:body_mind/components/constants.dart';
 import 'package:body_mind/model/user.dart';
 import 'package:body_mind/model/user_auth.dart';
 import 'package:body_mind/screens/login_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -44,7 +43,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   onSaved: (name) => user.name = name,
                 ),
                 MyTextField(
-                  prefix: Icons.person,
+                  prefix: Icons.email,
                   obscure: false,
                   hint: 'user@user.com',
                   label: 'Email',
@@ -88,11 +87,6 @@ class _SignupScreenState extends State<SignupScreen> {
                         onFail: (e) {
                           print('Ocorreu um erro $e');
                         });
-                    /* auth.signInWithEmailAndPassword(
-                    email: _email, password: _password);
-
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => LoginScreen())); */
                   },
                   title: 'Signup',
                 ),
@@ -102,7 +96,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => LoginScreen(),
+                        ),
                       );
                     },
                     child: Text(

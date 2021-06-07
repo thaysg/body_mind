@@ -1,9 +1,5 @@
 import 'package:body_mind/model/user_auth.dart';
-import 'package:body_mind/screens/home_screen.dart';
 import 'package:body_mind/screens/login_screen.dart';
-import 'package:body_mind/service/auth_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +26,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Body and Min',
         theme: ThemeData(
-          primaryColor: Color(0xFFff6369),
+          primaryColor: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: LoginScreen(),

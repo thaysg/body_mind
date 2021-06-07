@@ -1,9 +1,9 @@
 import 'package:body_mind/components/components.dart';
 import 'package:body_mind/components/constants.dart';
+import 'package:body_mind/model/user.dart';
 import 'package:body_mind/model/user_auth.dart';
 import 'package:body_mind/screens/home_screen.dart';
 import 'package:body_mind/screens/signup_screen.dart';
-import 'package:body_mind/service/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -32,28 +32,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Image.asset('images/2517894.jpg'),
                 ),
                 MyTextField(
-                  prefix: Icons.person,
-                  obscure: false,
-                  hint: 'John Doe',
-                  label: 'Nome',
-                  v: (name) {
-                    if (name.isEmpty) {
-                      return 'Digite seu nome';
-                    }
-                    return null;
-                  },
-                ),
-                MyTextField(
-                  prefix: Icons.person,
+                  prefix: Icons.email,
                   obscure: false,
                   hint: 'user@user.com',
                   label: 'Email',
-                  v: (email) {
-                    if (email.isEmpty) {
-                      return 'Digite seu email';
-                    }
-                    return null;
-                  },
+                  c: emailController,
                 ),
                 MyTextField(
                   prefix: Icons.lock,
@@ -61,22 +44,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   suffix: Icons.visibility,
                   hint: '123456',
                   label: 'Senha',
-                  v: (password) {
-                    if (password.isEmpty) {
-                      return 'Digite a senha';
-                    }
-                    return null;
-                  },
+                  c: passwordController,
                 ),
                 LoginButton(
                   onTap: () {
-                    /* auth.signInWithEmailAndPassword(
-                    email: _email, password: _password);
-
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => LoginScreen())); */
+                    if (formKey.currentState.validate()) {
+                      userAuth.singIn(
+                          userData: UserData(
+                              email: emailController.text,
+                              password: passwordController.text),
+                          onFail: (e) {
+                            print('Error');
+                          },
+                          onSuccess: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomeScreen(),
+                              ),
+                            );
+                          });
+                    }
                   },
-                  title: 'Signup',
+                  title: 'Login',
                 ),
                 Expanded(
                   flex: 2,
@@ -84,11 +74,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => SignupScreen(),
+                        ),
                       );
                     },
                     child: Text(
-                      'Já possui uma conta? \nEntre agora!',
+                      'Ainda não possui uma conta? \nCadastre-se agora!',
                       textAlign: TextAlign.center,
                       style: kAccountText,
                     ),
