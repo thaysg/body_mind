@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Expanded(
                   flex: 5,
-                  child: Image.asset('images/2517894.jpg'),
+                  child: Image.asset('images/logo.png'),
                 ),
                 MyTextField(
                   prefix: Icons.email,
